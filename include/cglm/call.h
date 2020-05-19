@@ -12,10 +12,12 @@ extern "C" {
 #endif
 
 #include "cglm.h"
+#include "call/vec2.h"
 #include "call/vec3.h"
 #include "call/vec4.h"
-#include "call/mat4.h"
+#include "call/mat2.h"
 #include "call/mat3.h"
+#include "call/mat4.h"
 #include "call/affine.h"
 #include "call/cam.h"
 #include "call/quat.h"
@@ -27,6 +29,9 @@ extern "C" {
 #include "call/project.h"
 #include "call/sphere.h"
 #include "call/ease.h"
+#include "call/curve.h"
+#include "call/bezier.h"
+#include "call/ray.h"
 
 #ifdef __cplusplus
 }

@@ -8,11 +8,19 @@
 #ifndef cglm_common_h
 #define cglm_common_h
 
-#define _USE_MATH_DEFINES /* for windows */
+#ifndef _USE_MATH_DEFINES
+#  define _USE_MATH_DEFINES       /* for windows */
+#endif
+
+#ifndef _CRT_SECURE_NO_WARNINGS
+#  define _CRT_SECURE_NO_WARNINGS /* for windows */
+#endif
 
 #include <stdint.h>
+#include <stddef.h>
 #include <math.h>
 #include <float.h>
+#include <stdbool.h>
 
 #if defined(_MSC_VER)
 #  ifdef CGLM_DLL
@@ -26,33 +34,8 @@
 #  define CGLM_INLINE static inline __attribute((always_inline))
 #endif
 
-#define glm__memcpy(type, dest, src, size)                                    \
-  do {                                                                        \
-    type *srci;                                                               \
-    type *srci_end;                                                           \
-    type *desti;                                                              \
-                                                                              \
-    srci     = (type *)src;                                                   \
-    srci_end = (type *)((char *)srci + size);                                 \
-    desti    = (type *)dest;                                                  \
-                                                                              \
-    while (srci != srci_end)                                                  \
-      *desti++ = *srci++;                                                     \
-  } while (0)
-
-#define glm__memset(type, dest, size, val)                                    \
-  do {                                                                        \
-    type *desti;                                                              \
-    type *desti_end;                                                          \
-                                                                              \
-    desti     = (type *)dest;                                                 \
-    desti_end = (type *)((char *)desti + size);                               \
-                                                                              \
-    while (desti != desti_end)                                                \
-      *desti++ = val;                                                         \
-  } while (0)
-
-#define glm__memzero(type, dest, size) glm__memset(type, dest, size, 0)
+#define GLM_SHUFFLE4(z, y, x, w) (((z) << 6) | ((y) << 4) | ((x) << 2) | (w))
+#define GLM_SHUFFLE3(z, y, x)    (((z) << 4) | ((y) << 2) | (x))
 
 #include "types.h"
 #include "simd/intrin.h"

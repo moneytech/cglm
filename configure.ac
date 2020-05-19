@@ -7,12 +7,29 @@
 #*****************************************************************************
 
 AC_PREREQ([2.69])
-AC_INIT([cglm], [0.4.8], [info@recp.me])
-AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
+AC_INIT([cglm], [0.7.6], [info@recp.me])
+AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects serial-tests])
+
+# Don't use the default cflags (-O2 -g), we set ours manually in Makefile.am.
+: ${CFLAGS=""}
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([src/])
 AC_CONFIG_HEADERS([config.h])
+
+# Dependencies for pkg-config.
+PKG_PROG_PKG_CONFIG
+# Ancient versions of pkg-config (such as the one used in Travis CI)
+# don't have this macro, so we need to do it manually.
+m4_ifdef([PKG_INSTALLDIR], [
+    PKG_INSTALLDIR
+], [
+    AC_ARG_WITH([pkgconfigdir],
+        [AS_HELP_STRING([--with-pkgconfigdir],
+                        [pkg-config installation directory ['${libdir}/pkgconfig']])],,
+        [with_pkgconfigdir=]'${libdir}/pkgconfig')
+    AC_SUBST([pkgconfigdir], [$with_pkgconfigdir])
+])
 
 # Checks for programs.
 AC_PROG_CC
@@ -29,6 +46,7 @@ LT_INIT
 # Checks for libraries.
 AC_CHECK_LIB([m], [floor])
 
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AC_SYS_LARGEFILE
 
 # Checks for header files.
@@ -52,6 +70,6 @@ AC_TYPE_UINT8_T
 # Checks for library functions.
 AC_FUNC_ERROR_AT_LINE
 
-AC_CONFIG_FILES([makefile])
+AC_CONFIG_FILES([Makefile cglm.pc])
 
 AC_OUTPUT

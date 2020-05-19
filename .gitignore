@@ -51,7 +51,6 @@ cscope.*
 test/*.trs
 test/test_*
 *.log
-test-*
 test/.libs/*
 test/tests
 cglm_arm/*
@@ -69,3 +68,10 @@ win/cglm_test_*
 win/x64
 win/x85
 win/Debug
+cglm-test-ios*
+/cglm.pc
+test-driver
+Default-568h@2x.png
+build/
+conftest.dir/*
+confdefs.h

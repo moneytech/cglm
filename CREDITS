@@ -52,3 +52,22 @@ https://gamedev.stackexchange.com/questions/28395/rotating-vector3-by-a-quaterni
 
 9. Sphere AABB intersect
 https://github.com/erich666/GraphicsGems/blob/master/gems/BoxSphere.c
+
+10. Horizontal add
+https://stackoverflow.com/questions/6996764/fastest-way-to-do-horizontal-float-vector-sum-on-x86
+
+11. de casteljau implementation and comments
+https://forums.khronos.org/showthread.php/10264-Animations-in-1-4-1-release-notes-revision-A/page2?highlight=bezier
+https://forums.khronos.org/showthread.php/10644-Animation-Bezier-interpolation
+https://forums.khronos.org/showthread.php/10387-2D-Tangents-in-Bezier-Splines?p=34164&viewfull=1#post34164
+https://forums.khronos.org/showthread.php/10651-Animation-TCB-Spline-Interpolation-in-COLLADA?highlight=bezier
+
+12. vec2 cross product
+http://allenchou.net/2013/07/cross-product-of-2d-vectors/
+
+13. Ray triangle intersect
+Möller–Trumbore ray-triangle intersection algorithm, from "Fast, Minimum Storage Ray/Triangle Intersection"
+Authors:
+  Thomas Möller (tompa@clarus.se)
+  Ben Trumbore (wbt@graphics.cornell.edu)
+Link to paper: http://webserver2.tecgraf.puc-rio.br/~mgattass/cg/trbRR/Fast%20MinimumStorage%20RayTriangle%20Intersection.pdf

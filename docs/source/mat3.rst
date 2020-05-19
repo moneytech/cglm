@@ -20,6 +20,8 @@ Functions:
 
 1. :c:func:`glm_mat3_copy`
 #. :c:func:`glm_mat3_identity`
+#. :c:func:`glm_mat3_identity_array`
+#. :c:func:`glm_mat3_zero`
 #. :c:func:`glm_mat3_mul`
 #. :c:func:`glm_mat3_transpose_to`
 #. :c:func:`glm_mat3_transpose`
@@ -28,8 +30,10 @@ Functions:
 #. :c:func:`glm_mat3_scale`
 #. :c:func:`glm_mat3_det`
 #. :c:func:`glm_mat3_inv`
+#. :c:func:`glm_mat3_trace`
 #. :c:func:`glm_mat3_swap_col`
 #. :c:func:`glm_mat3_swap_row`
+#. :c:func:`glm_mat3_rmc`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -48,6 +52,21 @@ Functions documentation
 
     Parameters:
       | *[out]* **mat**  matrix
+
+.. c:function:: void  glm_mat3_identity_array(mat3 * __restrict mat, size_t count)
+
+    make given matrix array's each element identity matrix
+
+    Parameters:
+      | *[in,out]* **mat**  matrix array (must be aligned (16/32) if alignment is not disabled)
+      | *[in]* **count**  count of matrices
+
+.. c:function:: void  glm_mat3_zero(mat3 mat)
+
+    make given matrix zero
+
+    Parameters:
+      | *[in,out]* **mat**  matrix to
 
 .. c:function:: void  glm_mat3_mul(mat3 m1, mat3 m2, mat3 dest)
 
@@ -124,6 +143,16 @@ Functions documentation
       | *[in]*  **mat**  matrix
       | *[out]* **dest** destination (inverse matrix)
 
+.. c:function:: void glm_mat3_trace(mat3 m)
+
+    | sum of the elements on the main diagonal from upper left to the lower right
+
+    Parameters:
+      | *[in]*  **m**  matrix
+
+    Returns:
+        trace of matrix
+
 .. c:function:: void  glm_mat3_swap_col(mat3 mat, int col1, int col2)
 
     swap two matrix columns
@@ -141,3 +170,20 @@ Functions documentation
       | *[in, out]*  **mat**   matrix
       | *[in]*       **row1**  row1
       | *[in]*       **row2**  row2
+
+.. c:function:: float  glm_mat3_rmc(vec3 r, mat3 m, vec3 c)
+
+    | **rmc** stands for **Row** * **Matrix** * **Column**
+
+    | helper for  R (row vector) * M (matrix) * C (column vector)
+
+    | the result is scalar because R * M = Matrix1x3 (row vector),
+    | then Matrix1x3 * Vec3 (column vector) = Matrix1x1 (Scalar)
+
+    Parameters:
+      | *[in]*  **r**  row vector or matrix1x3
+      | *[in]*  **m**  matrix3x3
+      | *[in]*  **c**  column vector or matrix3x1
+
+    Returns:
+        scalar value e.g. Matrix1x1

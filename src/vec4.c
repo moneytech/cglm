@@ -28,8 +28,8 @@ glmc_vec4_one(vec4 v) {
 
 CGLM_EXPORT
 void
-glmc_vec4_copy3(vec4 a, vec3 dest) {
-  glm_vec4_copy3(a, dest);
+glmc_vec4_copy3(vec4 v, vec3 dest) {
+  glm_vec4_copy3(v, dest);
 }
 
 CGLM_EXPORT
@@ -52,14 +52,14 @@ glmc_vec4_dot(vec4 a, vec4 b) {
 
 CGLM_EXPORT
 float
-glmc_vec4_norm(vec4 vec) {
-  return glm_vec4_norm(vec);
+glmc_vec4_norm(vec4 v) {
+  return glm_vec4_norm(v);
 }
 
 CGLM_EXPORT
 void
-glmc_vec4_normalize_to(vec4 vec, vec4 dest) {
-  glm_vec4_normalize_to(vec, dest);
+glmc_vec4_normalize_to(vec4 v, vec4 dest) {
+  glm_vec4_normalize_to(v, dest);
 }
 
 CGLM_EXPORT
@@ -70,8 +70,20 @@ glmc_vec4_normalize(vec4 v) {
 
 CGLM_EXPORT
 float
-glmc_vec4_norm2(vec4 vec) {
-  return glm_vec4_norm2(vec);
+glmc_vec4_norm2(vec4 v) {
+  return glm_vec4_norm2(v);
+}
+
+CGLM_EXPORT
+float
+glmc_vec4_norm_one(vec4 v) {
+  return glm_vec4_norm_one(v);
+}
+
+CGLM_EXPORT
+float
+glmc_vec4_norm_inf(vec4 v) {
+  return glm_vec4_norm_inf(v);
 }
 
 CGLM_EXPORT
@@ -154,44 +166,50 @@ glmc_vec4_muladds(vec4 a, float s, vec4 dest) {
 
 CGLM_EXPORT
 void
-glmc_vec4_flipsign(vec4 v) {
-  glm_vec4_flipsign(v);
+glmc_vec4_maxadd(vec4 a, vec4 b, vec4 dest) {
+  glm_vec4_maxadd(a, b, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_vec4_flipsign_to(vec4 v, vec4 dest) {
-  glm_vec4_flipsign_to(v, dest);
+glmc_vec4_minadd(vec4 a, vec4 b, vec4 dest) {
+  glm_vec4_minadd(a, b, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_vec4_inv(vec4 v) {
-  glm_vec4_inv(v);
+glmc_vec4_negate(vec4 v) {
+  glm_vec4_negate(v);
 }
 
 CGLM_EXPORT
 void
-glmc_vec4_inv_to(vec4 v, vec4 dest) {
-  glm_vec4_inv_to(v, dest);
+glmc_vec4_negate_to(vec4 v, vec4 dest) {
+  glm_vec4_negate_to(v, dest);
 }
 
 CGLM_EXPORT
 float
-glmc_vec4_distance(vec4 v1, vec4 v2) {
-  return glm_vec4_distance(v1, v2);
+glmc_vec4_distance(vec4 a, vec4 b) {
+  return glm_vec4_distance(a, b);
+}
+
+CGLM_EXPORT
+float
+glmc_vec4_distance2(vec4 a, vec4 b) {
+  return glm_vec4_distance2(a, b);
 }
 
 CGLM_EXPORT
 void
-glmc_vec4_maxv(vec4 v1, vec4 v2, vec4 dest) {
-  glm_vec4_minv(v1, v2, dest);
+glmc_vec4_maxv(vec4 a, vec4 b, vec4 dest) {
+  glm_vec4_maxv(a, b, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_vec4_minv(vec4 v1, vec4 v2, vec4 dest) {
-  glm_vec4_maxv(v1, v2, dest);
+glmc_vec4_minv(vec4 a, vec4 b, vec4 dest) {
+  glm_vec4_minv(a, b, dest);
 }
 
 CGLM_EXPORT
@@ -206,6 +224,54 @@ glmc_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest) {
   glm_vec4_lerp(from, to, t, dest);
 }
 
+CGLM_EXPORT
+void
+glmc_vec4_lerpc(vec4 from, vec4 to, float t, vec4 dest) {
+  glm_vec4_lerpc(from, to, t, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_step_uni(float edge, vec4 x, vec4 dest) {
+  glm_vec4_step_uni(edge, x, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_step(vec4 edge, vec4 x, vec4 dest) {
+  glm_vec4_step(edge, x, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_smoothstep_uni(float edge0, float edge1, vec4 x, vec4 dest) {
+  glm_vec4_smoothstep_uni(edge0, edge1, x, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_smoothstep(vec4 edge0, vec4 edge1, vec4 x, vec4 dest) {
+  glm_vec4_smoothstep(edge0, edge1, x, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_smoothinterp(vec4 from, vec4 to, float t, vec4 dest) {
+  glm_vec4_smoothinterp(from, to, t, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_smoothinterpc(vec4 from, vec4 to, float t, vec4 dest) {
+  glm_vec4_smoothinterpc(from, to, t, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_cubic(float s, vec4 dest) {
+  glm_vec4_cubic(s, dest);
+}
+
 /* ext */
 
 CGLM_EXPORT
@@ -218,6 +284,12 @@ CGLM_EXPORT
 void
 glmc_vec4_broadcast(float val, vec4 d) {
   glm_vec4_broadcast(val, d);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_fill(vec4 v, float val) {
+  glm_vec4_fill(v, val);
 }
 
 CGLM_EXPORT
@@ -240,14 +312,14 @@ glmc_vec4_eq_all(vec4 v) {
 
 CGLM_EXPORT
 bool
-glmc_vec4_eqv(vec4 v1, vec4 v2) {
-  return glm_vec4_eqv(v1, v2);
+glmc_vec4_eqv(vec4 a, vec4 b) {
+  return glm_vec4_eqv(a, b);
 }
 
 CGLM_EXPORT
 bool
-glmc_vec4_eqv_eps(vec4 v1, vec4 v2) {
-  return glm_vec4_eqv_eps(v1, v2);
+glmc_vec4_eqv_eps(vec4 a, vec4 b) {
+  return glm_vec4_eqv_eps(a, b);
 }
 
 CGLM_EXPORT
@@ -284,6 +356,24 @@ CGLM_EXPORT
 void
 glmc_vec4_sign(vec4 v, vec4 dest) {
   glm_vec4_sign(v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_abs(vec4 v, vec4 dest) {
+  glm_vec4_abs(v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_fract(vec4 v, vec4 dest) {
+  glm_vec4_fract(v, dest);
+}
+
+CGLM_EXPORT
+float
+glmc_vec4_hadd(vec4 v) {
+  return glm_vec4_hadd(v);
 }
 
 CGLM_EXPORT

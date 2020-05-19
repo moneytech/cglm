@@ -28,6 +28,18 @@ glmc_mat4_identity(mat4 mat) {
 
 CGLM_EXPORT
 void
+glmc_mat4_identity_array(mat4 * __restrict mat, size_t count) {
+  glm_mat4_identity_array(mat, count);
+}
+
+CGLM_EXPORT
+void
+glmc_mat4_zero(mat4 mat) {
+  glm_mat4_zero(mat);
+}
+
+CGLM_EXPORT
+void
 glmc_mat4_pick3(mat4 mat, mat3 dest) {
   glm_mat4_pick3(mat, dest);
 }
@@ -66,6 +78,18 @@ CGLM_EXPORT
 void
 glmc_mat4_mulv3(mat4 m, vec3 v, float last, vec3 dest) {
   glm_mat4_mulv3(m, v, last, dest);
+}
+
+CGLM_EXPORT
+float
+glmc_mat4_trace(mat4 m) {
+  return glm_mat4_trace(m);
+}
+
+CGLM_EXPORT
+float
+glmc_mat4_trace3(mat4 m) {
+  return glm_mat4_trace3(m);
 }
 
 CGLM_EXPORT
@@ -132,4 +156,10 @@ CGLM_EXPORT
 void
 glmc_mat4_swap_row(mat4 mat, int row1, int row2) {
   glm_mat4_swap_row(mat, row1, row2);
+}
+
+CGLM_EXPORT
+float
+glmc_mat4_rmc(vec4 r, mat4 m, vec4 c) {
+  return glm_mat4_rmc(r, m, c);
 }

@@ -43,10 +43,14 @@ Functions:
 #. :c:func:`glm_vec4_subadd`
 #. :c:func:`glm_vec4_muladd`
 #. :c:func:`glm_vec4_muladds`
+#. :c:func:`glm_vec4_maxadd`
+#. :c:func:`glm_vec4_minadd`
 #. :c:func:`glm_vec4_flipsign`
-#. :c:func:`glm_vec_flipsign_to`
+#. :c:func:`glm_vec4_flipsign_to`
 #. :c:func:`glm_vec4_inv`
 #. :c:func:`glm_vec4_inv_to`
+#. :c:func:`glm_vec4_negate`
+#. :c:func:`glm_vec4_negate_to`
 #. :c:func:`glm_vec4_normalize`
 #. :c:func:`glm_vec4_normalize_to`
 #. :c:func:`glm_vec4_distance`
@@ -54,11 +58,7 @@ Functions:
 #. :c:func:`glm_vec4_minv`
 #. :c:func:`glm_vec4_clamp`
 #. :c:func:`glm_vec4_lerp`
-#. :c:func:`glm_vec4_isnan`
-#. :c:func:`glm_vec4_isinf`
-#. :c:func:`glm_vec4_isvalid`
-#. :c:func:`glm_vec4_sign`
-#. :c:func:`glm_vec4_sqrt`
+#. :c:func:`glm_vec4_cubic`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -134,7 +134,8 @@ Functions documentation
 
 .. c:function:: float  glm_vec4_norm(vec4 vec)
 
-    norm (magnitude) of vec4
+    | euclidean norm (magnitude), also called L2 norm
+    | this will give magnitude of vector in euclidean space
 
     Parameters:
       | *[in]*  **vec**   vector
@@ -260,16 +261,40 @@ Functions documentation
       | *[in]*  **s**     scalar
       | *[out]* **dest**  dest += (a * b)
 
+.. c:function:: void  glm_vec4_maxadd(vec4 a, vec4 b, vec4 dest)
+
+    | add max of two vector to result/dest
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
+      | *[out]* **dest**  dest += (a * b)
+
+.. c:function:: void  glm_vec4_minadd(vec4 a, vec4 b, vec4 dest)
+
+    | add min of two vector to result/dest
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
+      | *[out]* **dest**  dest += (a * b)
+
 .. c:function:: void  glm_vec4_flipsign(vec4 v)
 
-    flip sign of all vec4 members
+    **DEPRACATED!**
+
+    use :c:func:`glm_vec4_negate`
 
     Parameters:
     | *[in, out]*  **v**    vector
 
 .. c:function:: void  glm_vec4_flipsign_to(vec4 v, vec4 dest)
 
-    flip sign of all vec4 members and store result in dest
+    **DEPRACATED!**
+
+    use :c:func:`glm_vec4_negate_to`
 
     Parameters:
       | *[in]*  **v**       vector
@@ -277,18 +302,37 @@ Functions documentation
 
 .. c:function:: void  glm_vec4_inv(vec4 v)
 
-    make vector as inverse/opposite of itself
+    **DEPRACATED!**
+
+    use :c:func:`glm_vec4_negate`
 
     Parameters:
       | *[in, out]*  **v**    vector
 
 .. c:function:: void  glm_vec4_inv_to(vec4 v, vec4 dest)
 
-    inverse/opposite vector
+    **DEPRACATED!**
+
+    use :c:func:`glm_vec4_negate_to`
 
     Parameters:
       | *[in]*  **v**     source
       | *[out]* **dest**  destination
+
+.. c:function:: void  glm_vec4_negate(vec4 v)
+
+    negate vector components
+
+    Parameters:
+    | *[in, out]*  **v**    vector
+
+.. c:function:: void  glm_vec4_negate_to(vec4 v, vec4 dest)
+
+    negate vector components and store result in dest
+
+    Parameters:
+      | *[in]*  **v**       vector
+      | *[out]* **dest**    negated vector
 
 .. c:function:: void  glm_vec4_normalize(vec4 v)
 
@@ -353,4 +397,12 @@ Functions documentation
       | *[in]*  **from**   from value
       | *[in]*  **to**     to value
       | *[in]*  **t**      interpolant (amount) clamped between 0 and 1
+      | *[out]* **dest**   destination
+
+.. c:function:: void  glm_vec4_cubic(float s, vec4 dest)
+
+    helper to fill vec4 as [S^3, S^2, S, 1]
+
+    Parameters:
+      | *[in]*  **s**      parameter
       | *[out]* **dest**   destination

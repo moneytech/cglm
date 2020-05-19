@@ -57,12 +57,19 @@ For instance you may called **glm_vec4_** functions for **vec3** data type.
 It will try to write 32 byte but since **vec3** is 24 byte it should throw
 memory access error or exit the app without saying anything.
 
+**UPDATE - IMPORTANT:** 
+
+  | On MSVC or some other compilers, if alignment is enabled (default) then double check alignment requirements if you got a crash.
+
+  | If you send GLM_VEC4_ONE or similar macros directly to a function, it may be crashed.
+  | Because compiler may not apply alignment as defined on **typedef** to that macro while passing it (on stack) to a function.
+
 Wrong Results:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Again, you may used wrong function.
 
-For instance if you use **glm_normalize()** or **glm_vec_normalize()** for **vec4**,
+For instance if you use **glm_normalize()** or **glm_vec3_normalize()** for **vec4**,
 it will assume that passed param is **vec3** and will normalize it for **vec3**.
 Since you need to **vec4** to be normalized in your case, you will get wrong results.
 
@@ -72,6 +79,19 @@ You only get wrong results if you don't know what you are doing!
 So be carefull, when your IDE (Xcode, Visual Studio ...) tried to autocomplete function names, READ IT :)
 
 **Also implementation may be wrong please let us know by creating an issue on Github.**
+
+BAD_ACCESS : Thread 1: EXC_BAD_ACCESS (code=EXC_I386_GPFLT) or Similar Errors/Crashes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This is similar issue with alignment. For instance if you compiled **cglm** with 
+AVX (**-mavx**, intentionally or not) and if you use **cglm** in an environment that doesn't 
+support AVX (or if AVX is disabled intentionally) e.g. environment that max support SSE2/3/4, 
+then you probably get **BAD ACCESS** or similar...
+
+Because if you compile **cglm** with AVX it aligns **mat4** with 32 byte boundary, 
+and your project aligns that as 16 byte boundary...
+
+Check alignment, supported vector extension or simd in **cglm** and linked projects...
 
 Other Issues?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

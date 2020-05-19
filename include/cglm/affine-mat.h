@@ -152,7 +152,7 @@ glm_inv_tr(mat4 mat) {
   glm_inv_tr_sse2(mat);
 #else
   CGLM_ALIGN_MAT mat3 r;
-  CGLM_ALIGN(16) vec3 t;
+  CGLM_ALIGN(8)  vec3 t;
 
   /* rotate */
   glm_mat4_pick3t(mat, r);
@@ -160,8 +160,8 @@ glm_inv_tr(mat4 mat) {
 
   /* translate */
   glm_mat3_mulv(r, mat[3], t);
-  glm_vec_flipsign(t);
-  glm_vec_copy(t, mat[3]);
+  glm_vec3_negate(t);
+  glm_vec3_copy(t, mat[3]);
 #endif
 }
 

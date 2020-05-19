@@ -27,6 +27,7 @@ Macros:
 Functions:
 
 1. :c:func:`glm_quat_identity`
+#. :c:func:`glm_quat_identity_array`
 #. :c:func:`glm_quat_init`
 #. :c:func:`glm_quat`
 #. :c:func:`glm_quatv`
@@ -69,6 +70,14 @@ Functions documentation
 
     Parameters:
       | *[in, out]*  **q**    quaternion
+
+.. c:function:: void  glm_quat_identity_array(versor * __restrict q, size_t count)
+
+    | make given quaternion array's each element identity quaternion
+
+    Parameters:
+      | *[in, out]*  **q**   quat array (must be aligned (16) if alignment is not disabled)
+      | *[in]*  **count**    count of quaternions
 
 .. c:function:: void  glm_quat_init(versor q, float x, float y, float z, float w)
 
@@ -315,26 +324,24 @@ Functions documentation
       | *[in]*  **ori**   orientation in world space as quaternion
       | *[out]* **dest**  result matrix
 
-.. c:function:: void  glm_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest)
+.. c:function:: void  glm_quat_for(vec3 dir, vec3 up, versor dest)
 
     | creates look rotation quaternion
 
     Parameters:
       | *[in]*  **dir**   direction to look
-      | *[in]*  **fwd**   forward vector
       | *[in]*  **up**    up vector
       | *[out]* **dest**  result matrix
 
-.. c:function:: void  glm_quat_forp(vec3 from, vec3 to, vec3 fwd, vec3 up, versor dest)
+.. c:function:: void  glm_quat_forp(vec3 from, vec3 to, vec3 up, versor dest)
 
-    | creates look rotation quaternion using source and  destination positions p suffix stands for position
+    | creates look rotation quaternion using source and destination positions p suffix stands for position
 
     | this is similar to glm_quat_for except this computes direction for glm_quat_for for you.
 
     Parameters:
       | *[in]*  **from**  source point
       | *[in]*  **to**    destination point
-      | *[in]*  **fwd**   forward vector
       | *[in]*  **up**    up vector
       | *[out]* **dest**  result matrix
 

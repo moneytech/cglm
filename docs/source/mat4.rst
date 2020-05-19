@@ -25,6 +25,8 @@ Functions:
 1. :c:func:`glm_mat4_ucopy`
 #. :c:func:`glm_mat4_copy`
 #. :c:func:`glm_mat4_identity`
+#. :c:func:`glm_mat4_identity_array`
+#. :c:func:`glm_mat4_zero`
 #. :c:func:`glm_mat4_pick3`
 #. :c:func:`glm_mat4_pick3t`
 #. :c:func:`glm_mat4_ins3`
@@ -32,6 +34,8 @@ Functions:
 #. :c:func:`glm_mat4_mulN`
 #. :c:func:`glm_mat4_mulv`
 #. :c:func:`glm_mat4_mulv3`
+#. :c:func:`glm_mat3_trace`
+#. :c:func:`glm_mat3_trace3`
 #. :c:func:`glm_mat4_quat`
 #. :c:func:`glm_mat4_transpose_to`
 #. :c:func:`glm_mat4_transpose`
@@ -42,6 +46,7 @@ Functions:
 #. :c:func:`glm_mat4_inv_fast`
 #. :c:func:`glm_mat4_swap_col`
 #. :c:func:`glm_mat4_swap_row`
+#. :c:func:`glm_mat4_rmc`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -68,6 +73,21 @@ Functions documentation
 
     Parameters:
       | *[out]* **mat**  matrix
+
+.. c:function:: void  glm_mat4_identity_array(mat4 * __restrict mat, size_t count)
+
+    make given matrix array's each element identity matrix
+
+    Parameters:
+      | *[in,out]* **mat**  matrix array (must be aligned (16/32) if alignment is not disabled)
+      | *[in]* **count**  count of matrices
+
+.. c:function:: void  glm_mat4_zero(mat4 mat)
+
+    make given matrix zero
+
+    Parameters:
+      | *[in,out]* **mat**  matrix to
 
 .. c:function:: void  glm_mat4_pick3(mat4 mat, mat3 dest)
 
@@ -146,6 +166,27 @@ Functions documentation
     | *[in]*  **m**     mat4 (left)
     | *[in]*  **v**     vec3 (right, column vector)
     | *[out]* **dest**  vec3 (result, column vector)
+
+.. c:function:: void  glm_mat4_trace(mat4 m)
+
+    | sum of the elements on the main diagonal from upper left to the lower right
+
+    Parameters:
+      | *[in]*  **m**  matrix
+
+    Returns:
+        trace of matrix
+
+.. c:function:: void  glm_mat4_trace3(mat4 m)
+
+    | trace of matrix (rotation part)
+    | sum of the elements on the main diagonal from upper left to the lower right
+
+    Parameters:
+      | *[in]*  **m**  matrix
+
+    Returns:
+        trace of matrix
 
 .. c:function:: void  glm_mat4_quat(mat4 m, versor dest)
 
@@ -238,3 +279,20 @@ Functions documentation
       | *[in, out]*  **mat**   matrix
       | *[in]*       **row1**  row1
       | *[in]*       **row2**  row2
+
+.. c:function:: float  glm_mat4_rmc(vec4 r, mat4 m, vec4 c)
+
+    | **rmc** stands for **Row** * **Matrix** * **Column**
+
+    | helper for  R (row vector) * M (matrix) * C (column vector)
+
+    | the result is scalar because R * M = Matrix1x4 (row vector),
+    | then Matrix1x4 * Vec4 (column vector) = Matrix1x1 (Scalar)
+
+    Parameters:
+      | *[in]*  **r**  row vector or matrix1x4
+      | *[in]*  **m**  matrix4x4
+      | *[in]*  **c**  column vector or matrix4x1
+
+    Returns:
+        scalar value e.g. Matrix1x1
